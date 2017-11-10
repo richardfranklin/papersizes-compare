@@ -4,7 +4,7 @@ export default function(state = null, action) {
 
     switch(action.type) {
         case 'CATEGORY_SELECTED':
-        // console.log('category selected');
+        // console.log(`category selected: ${action.payload}`);
         return action.payload;
     }
     return state;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Select from 'react-select';
 
 // Import the category picker action
 import { selectPaper } from '../actions/action_paper-selector'; 
@@ -10,42 +11,41 @@ class PaperSelector extends Component {
     constructor(props) {
         super();
 
-        this.state = { activePaper: '' };
+        // console.log(props.activeCategoryArr);
+        
+        this.state = { 
+            activePaper: '',
+            paperObj: []
+         };
 
-        this.renderPaperList = this.renderPaperList.bind(this);
         this.paperChanged = this.paperChanged.bind(this);
     }
 
-    renderPaperList() {
-        if (this.props.activeCategoryArr) {
-            return this.props.activeCategoryArr.map((active) => {
-                return (
-                    <option 
-                        key={active.paperName}>
-                        {active.paperName}
-                    </option>
-                );
-        });
-        }
-    }
 
-    paperChanged(event) {
-        this.setState({ activePaper: event.target.value },() => {
+    paperChanged(val) {
+        this.setState({ activePaper: val.value },() => {
             // call activePaper action
+            // console.log(`paper changed: ${this.state.activePaper}`);
+
+            // Update the state to include the current active paper (e.g. A4)
             this.props.selectPaper(this.state.activePaper);
         })
     }
 
+
     render() {
 
-        if (this.props.category === null) {
-            return <p>Please select a category</p>
+        if (this.props.categoryObjectMapped === null) {
+            return <p>Please select a paper</p>
         }
 
         return (
-            <select onChange={this.paperChanged}>
-                {this.renderPaperList()}
-            </select>
+            <Select
+                name="form-field-name-2"
+                value="one"
+                options={this.props.categoryObjectMapped}
+                onChange={this.paperChanged}
+            />
         )
     };
 }
@@ -53,7 +53,7 @@ class PaperSelector extends Component {
 function mapStateToProps(state) {
     // console.log(state.categories[state.activeCategory]);
     return {
-        activeCategoryArr: state.categories[state.activeCategory]
+        categoryObjectMapped: state.activeCategoryArr,
     };
 }
 

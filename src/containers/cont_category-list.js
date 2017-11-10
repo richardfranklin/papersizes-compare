@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Select from 'react-select';
 
 // Import the category picker action
 import { selectCategory } from '../actions/action_category-selector';
@@ -11,34 +12,65 @@ class CategorySelector extends Component {
         // super is required here
         super();
 
-        this.state = { activeCategory: '' };
+        // Create new object, push all category keys (names) to it
+        // to be used with select control plugin
+        const categoryObj = () => {
+            const categoryObj = props.categories,
+                newCategoryArray = [];
+
+            Object.keys(categoryObj).map((category) => {
+                newCategoryArray.push({
+                    value: category,
+                    label: category
+                    // sizex: category.sizex,
+                    // sizey: category.sizey
+                })
+            });
+            return newCategoryArray;
+        };
+
+        // Set component state
+        this.state = {
+            activeCategory: '',
+            categoryObject: categoryObj(),
+            categoryObjectMapped: []
+        };
 
         this.categoryChanged = this.categoryChanged.bind(this);
     }
 
-    renderCategoryList() {
-        var categoryObj = this.props.categories;
+    categoryChanged(val) {
 
-        // Map the paper list object (state) to a new object and loop through, printing all the keys
-        return Object.keys(categoryObj).map((category) => {
-            return (
-                <option key={category}>{category}</option>
-            );
-        });
+        // set current categoryObjectMapped from current selected property
+        const   selectedActiveCatArr = this.props.categories[val.value],
+                mappedActiveCatArr = [];
+
+        // console.log(activeCategoryMappedArray);
+
+        selectedActiveCatArr.map((currentCategory) => {
+            mappedActiveCatArr.push({ 
+                value: currentCategory.paperName,
+                label: currentCategory.paperName,
+                sizex: currentCategory.sizex,
+                sizey: currentCategory.sizey
+             })
+        })
+
+        this.setState({ categoryObjectMapped: mappedActiveCatArr }, () => {
+            this.props.selectCategory(this.state.categoryObjectMapped);
+        })
+
+
     }
 
-    categoryChanged(event) {
-        this.setState({ activeCategory: event.target.value }, () => {
-            this.props.selectCategory(this.state.activeCategory);
-        });
-    }
-    
     render() {
         return (
-            // <select onChange={() => this.props.selectCategory("Canadian")}>
-            <select onChange={this.categoryChanged}>
-                {this.renderCategoryList()}
-            </select>
+            <Select
+                name="form-field-name"
+                value="one"
+                options={this.state.categoryObject}
+                onChange={this.categoryChanged}
+            />
         );
     }
 }

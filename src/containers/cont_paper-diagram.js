@@ -8,11 +8,15 @@ class PaperDiagram extends Component {
     }
 
     renderPaperList() {
+
+        // console.log(this.props.activeCategoryArr);
+        // console.log(this.props.activePaper);
+
         if (this.props.activeCategoryArr) {
             return this.props.activeCategoryArr.map((active) => {
-                if (active.paperName === this.props.activePaper) {
+                if (active.value === this.props.activePaper) {
                     return (
-                        <p key={active.paperName + "dimensions"}>{active.sizex} x {active.sizey}</p>
+                        <p key={active.value + "dimensions"}>{active.sizex} x {active.sizey}</p>
                     )
                 }
         });
@@ -25,11 +29,6 @@ class PaperDiagram extends Component {
                 <p>Nothing Selected</p>
             );
         }
-
-        // return (
-        //     <p>wfwfwfwe</p>
-        // );
-
         return (
             <div>
                 {this.renderPaperList()}
@@ -40,10 +39,8 @@ class PaperDiagram extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state.categories[state.activeCategory]);
-
     return {
-        activeCategoryArr: state.categories[state.activeCategory],
+        activeCategoryArr: state.activeCategoryArr,
         activePaper: state.activePaper
     };
 }
