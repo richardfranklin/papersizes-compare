@@ -4,39 +4,47 @@ import { bindActionCreators } from 'redux';
 import Select from 'react-select';
 
 // Import the category picker action
-import { selectPaper } from '../actions/action_paper-selector'; 
+import { selectPaper } from '../actions/action_paper_selector'; 
 
 class PaperSelector extends Component {
 
+    /* =======================================
+        constructor
+    ======================================= */
+    
     constructor(props) {
         super();
 
-        // console.log(props.activeCategoryArr);
-        
         this.state = { 
             activePaper: '',
             paperObj: []
-         };
+        };
 
         this.paperChanged = this.paperChanged.bind(this);
     }
 
-
+    /* =======================================
+        paperChanged
+    ======================================= */
+    
     paperChanged(val) {
         this.setState({ activePaper: val.value },() => {
             // call activePaper action
             // console.log(`paper changed: ${this.state.activePaper}`);
 
             // Update the state to include the current active paper (e.g. A4)
-            this.props.selectPaper(this.state.activePaper);
+            this.props.selectPaper(this.state.activePaper, this.props.picker);
         })
     }
 
+    /* =======================================
+        render
+    ======================================= */
 
     render() {
 
         if (this.props.categoryObjectMapped === null) {
-            return <p>Please select a paper</p>
+            return <p>Please select a category</p>
         }
 
         return (
@@ -50,10 +58,10 @@ class PaperSelector extends Component {
     };
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
     // console.log(state.categories[state.activeCategory]);
     return {
-        categoryObjectMapped: state.activeCategoryArr,
+        categoryObjectMapped: state["activeCategoryArr_" + ownProps.picker],
     };
 }
 

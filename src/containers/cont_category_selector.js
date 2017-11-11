@@ -3,14 +3,20 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Select from 'react-select';
 
-// Import the category picker action
-import { selectCategory } from '../actions/action_category-selector';
+import { selectCategory } from '../actions/action_category_selector';
 
 class CategorySelector extends Component {
+
+    /* =======================================
+        constructor
+    ======================================= */
 
     constructor(props) {
         // super is required here
         super();
+
+        // To be used to give each picker its own component
+        const papercategory = props.papercategory;
 
         // Create new object, push all category keys (names) to it
         // to be used with select control plugin
@@ -39,6 +45,10 @@ class CategorySelector extends Component {
         this.categoryChanged = this.categoryChanged.bind(this);
     }
 
+    /* =======================================
+        categoryChanged
+    ======================================= */
+
     categoryChanged(val) {
 
         // set current categoryObjectMapped from current selected property
@@ -57,20 +67,26 @@ class CategorySelector extends Component {
         })
 
         this.setState({ categoryObjectMapped: mappedActiveCatArr }, () => {
-            this.props.selectCategory(this.state.categoryObjectMapped);
+            this.props.selectCategory(this.state.categoryObjectMapped, this.props.picker);
         })
 
 
     }
 
+    /* =======================================
+        render
+    ======================================= */
+
     render() {
         return (
+            <div>
             <Select
                 name="form-field-name"
                 value="one"
                 options={this.state.categoryObject}
                 onChange={this.categoryChanged}
             />
+            </div>
         );
     }
 }

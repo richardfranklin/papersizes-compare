@@ -3,9 +3,18 @@
 
 // This reducer will pick up any 'PAPER_SELECTED' information passed to it from any action
 // and update the index.js rootReducer - updating the global state and updating any react components 
-export default function(state = null, action) {
+export function ActivePaper_1 (state = null, action) {
     switch(action.type) {
-        case 'PAPER_SELECTED':
+        case 'PAPER_1_SELECTED':
+        // console.log(action.payload);
+        return action.payload;
+    }
+    return state;
+}
+
+export function ActivePaper_2 (state = null, action) {
+    switch(action.type) {
+        case 'PAPER_2_SELECTED':
         // console.log(action.payload);
         return action.payload;
     }
