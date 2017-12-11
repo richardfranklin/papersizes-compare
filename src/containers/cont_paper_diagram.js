@@ -10,10 +10,14 @@ class PaperDiagram extends Component {
     renderPaperList() {
 
         if (this.props['activeCategoryArr_' + this.props.picker]) {
+
+            console.log(this.props['activeCategoryArr_' + this.props.picker]);
+
             return this.props['activeCategoryArr_' + this.props.picker].map((active) => {
                 if (active.value === this.props['activePaper_' + this.props.picker]) {
+
                     return (
-                        <p key={active.value + "dimensions"}>{active.sizex} x {active.sizey}</p>
+                        <div key={active.value + "dimensions"}>{active.sizex} x {active.sizey}</div>
                     )
                 }
         });
@@ -23,7 +27,7 @@ class PaperDiagram extends Component {
     render() {
         if (this.props['activePaper_' + this.props.picker] === null) {
             return (
-                <p>Nothing Selected</p>
+                <p>Please select a paper</p>
             );
         }
         return (
