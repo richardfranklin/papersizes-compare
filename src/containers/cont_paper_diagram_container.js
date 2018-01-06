@@ -12,18 +12,25 @@ class PaperDiagramContainer extends Component {
     for (var propNo = 1; propNo < 3; propNo++) {
       this.props["activeCategoryArr_" + propNo].map(active => {
         if (active.value === this.props["activePaper_" + propNo]) {
-
-            sizesObj["value_" + propNo + "_x"] = active.sizex;
-            sizesObj["value_" + propNo + "_y"] = active.sizey;
+          sizesObj["value_" + propNo + "_x"] = active.sizex;
+          sizesObj["value_" + propNo + "_y"] = active.sizey;
         }
       });
     }
 
-    this.calculatePaperPercentages(sizesObj);
+    return this.calculatePaperPercentages(sizesObj);
   }
 
   calculatePaperPercentages(sizesObj) {
     console.log(sizesObj);
+
+    return (
+      <div className="compare-container">
+        <div className="compare-inner">
+          <div className="padding-con" />
+        </div>
+      </div>
+    );
   }
 
   render() {
