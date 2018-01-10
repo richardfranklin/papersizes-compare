@@ -11,16 +11,17 @@ class PaperDiagram extends Component {
 
         if (this.props['activeCategoryArr_' + this.props.picker]) {
 
-            console.log(this.props['activeCategoryArr_' + this.props.picker]);
+            // console.log(this.props['activeCategoryArr_' + this.props.picker]);
 
             return this.props['activeCategoryArr_' + this.props.picker].map((active) => {
                 if (active.value === this.props['activePaper_' + this.props.picker]) {
-
                     return (
                         <div key={active.value + "dimensions"}>{active.sizex} x {active.sizey}</div>
                     )
                 }
-        });
+
+                return null;
+            });
         }
     }
 

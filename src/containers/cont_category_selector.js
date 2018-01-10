@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 import { selectCategory } from '../actions/action_category_selector';
 
@@ -16,7 +17,7 @@ class CategorySelector extends Component {
         super();
 
         // To be used to give each picker its own component
-        const papercategory = props.papercategory;
+        // const papercategory = props.papercategory;
 
         // Create new object, push all category keys (names) to it
         // to be used with select control plugin
@@ -25,7 +26,7 @@ class CategorySelector extends Component {
                 newCategoryArray = [];
 
             Object.keys(categoryObj).map((category) => {
-                newCategoryArray.push({
+                return newCategoryArray.push({
                     value: category,
                     label: category
                     // sizex: category.sizex,
@@ -58,7 +59,7 @@ class CategorySelector extends Component {
         // console.log(activeCategoryMappedArray);
 
         selectedActiveCatArr.map((currentCategory) => {
-            mappedActiveCatArr.push({ 
+            return mappedActiveCatArr.push({ 
                 value: currentCategory.paperName,
                 label: currentCategory.paperName,
                 sizex: currentCategory.sizex,

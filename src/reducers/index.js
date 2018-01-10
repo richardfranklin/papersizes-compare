@@ -8,7 +8,7 @@ import { ActivePaper_2 } from './reducer_active_paper';
 const CategoriesData = {};
 
 Object.keys(CategoriesReducer).map((category) => {
-  CategoriesData[category] = CategoriesReducer[category];
+  return CategoriesData[category] = CategoriesReducer[category];
 });
 
 const rootReducer = combineReducers({

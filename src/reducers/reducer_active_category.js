@@ -4,16 +4,16 @@ export function CategoryReducer_1 (state = null, action) {
 
     switch(action.type) {
         case `CATEGORY_1_SELECTED`:
-        return action.payload;
+             return action.payload;
+        default: return state;
     }
-    return state;
 }
 
 export function CategoryReducer_2 (state = null, action) {
     
     switch(action.type) {
         case `CATEGORY_2_SELECTED`:
-        return action.payload;
+            return action.payload;
+        default: return state;
     }
-    return state;
 }

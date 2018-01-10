@@ -8,8 +8,8 @@ export function ActivePaper_1 (state = null, action) {
         case 'PAPER_1_SELECTED':
         // console.log(action.payload);
         return action.payload;
+        default: return state;
     }
-    return state;
 }
 
 export function ActivePaper_2 (state = null, action) {
@@ -17,6 +17,6 @@ export function ActivePaper_2 (state = null, action) {
         case 'PAPER_2_SELECTED':
         // console.log(action.payload);
         return action.payload;
+        default: return state;
     }
-    return state;
 }

@@ -9,13 +9,18 @@ class PaperDiagramContainer extends Component {
   obtainPaperList() {
     const sizesObj = {};
 
-    for (var propNo = 1; propNo < 3; propNo++) {
+    const makeObj = () => {
       this.props["activeCategoryArr_" + propNo].map(active => {
         if (active.value === this.props["activePaper_" + propNo]) {
           sizesObj["value_" + propNo + "_x"] = active.sizex;
           sizesObj["value_" + propNo + "_y"] = active.sizey;
         }
+        return null;
       });
+    }
+
+    for (var propNo = 1; propNo < 3; propNo++) {
+      makeObj(this);
     }
 
     return this.calculatePaperPercentages(sizesObj);
@@ -38,7 +43,7 @@ class PaperDiagramContainer extends Component {
       this.props.activePaper_1 === null ||
       this.props.activePaper_2 === null
     ) {
-      return <p>Please select a paper zzzzz</p>;
+      return <p>Please select a paper</p>;
     }
     return <div>{this.obtainPaperList()}</div>;
   }
